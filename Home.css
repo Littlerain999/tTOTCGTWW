@@ -1,0 +1,208 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #333;
+    color: #eee;
+    min-height: 100svh;
+    padding-top: 5svh;
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 10px;
+        background: #2222229c;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #eeeeee94;
+        border-radius: 10px;
+    }
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 5svh;
+    justify-content: center;
+    align-items: center;
+    & h3 {
+        font-size: 5svh
+    }
+}
+
+.background-pic {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+}
+
+main {
+    height: 95svh;
+    /* background: #333333ca; */
+    padding: 5px;
+    & .info-section {
+        overflow: hidden;
+        display: flex;
+        max-width: 800px;
+        align-items: end;
+        margin: auto;
+        gap: 10px;
+        & .section {
+            border: 2px solid gray;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            & .title {
+                font-size: 2.5svh;
+                padding: 20px;
+                background: #222222d0;
+                width: 100%;
+                padding: 10px;
+            }
+            & .btn-section {
+                width: 100%;
+                background: #11111181;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                padding: 5px 0;
+                & button {
+                    font-size: 2.5svh;
+                    font-weight: 600;
+                    padding: 10px 30px;
+                    border: none;
+                    border-radius: 3px;
+                    color: #eee;
+                    cursor: pointer;
+                    transition: .25s;
+                }
+                & .read-first {
+                    background: green;
+                    &:hover {
+                        background: lime;
+                        color: black;
+                    }
+                }
+                & .read-last {
+                    background: goldenrod;
+                    &:hover {
+                        background: black;
+                        color: goldenrod;
+                    }
+                }
+            }
+            & .story-cover {
+                height: 100%;
+                width: 100%;
+                cursor: pointer;
+                transition: .25s;
+                &:hover {
+                    filter: brightness(1.2);
+                };
+            }
+        }
+        & .section#one {
+            width: calc(100% - 310px);
+        }
+        & .section#two {
+            width: 300px;
+        }
+    }
+}
+
+main .chapters {
+    background: #33333377;
+    max-width: 800px;
+    margin: auto;
+    border: 2px solid gray;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+    & h3 {
+        font-size: 2.5svh;
+        padding: 10px;
+        background: #111111ea;
+    }
+    & .list {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+        padding: 10px;
+        backdrop-filter: blur(2px);
+        & .chapter {
+            background: #111111b9;
+            padding: 10px;
+            font-size: 2.5svh;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 3px;
+            color: #eee;
+            transition: .25s;
+            cursor: pointer;
+            &:hover {
+                background: #222222e2;
+            }
+        }
+    }
+}
+
+main footer {
+    background: #3333337f;
+    text-align: center;
+    margin-top: 30px;
+    padding: 30px;
+}
+
+.cover-pic {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.685);
+    backdrop-filter: blur(4px);
+    scale: 0;
+    & img {
+        border-radius: 4px;
+        width: 80svw;
+        height: 80svh;
+        object-fit: contain;
+    }
+}
+
+.cover-pic.active {
+    scale: 1;
+}
+
+.linker {
+    scale: 0;
+}
+
+@media screen and (max-width: 670px) {
+    main .info-section {
+        flex-direction: column-reverse;
+        align-items: center;
+        & .section#one {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
