@@ -21,6 +21,6 @@ document.querySelectorAll('main .info-section .btn-section button').forEach(butt
 })
 
 document.querySelector('header h3').addEventListener('click', () => {
-    linker.innerHTML = `<a href="Home.html" id="clicker"></a>`
+    linker.innerHTML = `<a href="index.html" id="clicker"></a>`
     document.getElementById('clicker').click()
 })
