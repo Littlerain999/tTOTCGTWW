@@ -1,0 +1,446 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main .content-section .content {
+    & h1, h3, i, p {
+        font-family: 'Times New Roman', Times, serif;
+    }
+    & h3, h1 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+
+body {
+    height: 100svh;
+    color: #eee;
+    padding-top: 5svh;
+}
+
+header {
+    background-color: #555;
+    height: 5svh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 10px #111;
+    display: grid;
+    grid-template-columns: 1fr 7svh;
+    align-items: center;
+    padding-left: 10px;
+    z-index: 99;
+    & h3 {
+        font-size: 4svh;
+        width: 100px;
+        cursor: pointer;
+    }
+    & button {
+        background: none;
+        height: 100%;
+        border: none;
+        border-left: 2px solid #666;
+        color: #eee;
+        font-family: monospace;
+        font-size: 2.5svh;
+        font-weight: 600;
+        outline: none;
+        cursor: pointer;
+        transition: .25s;
+        &:hover {
+            background: #777;
+        }
+    }
+}
+
+main {
+    background-color: #333;
+    height: 95svh;
+    padding: 0 10px;
+    position: relative;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 10px;
+        background: #222;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #666;
+    }
+    & .changePage {
+        position: absolute;
+        top: 30svh;
+        background: #2222223f;
+        color: #eee;
+        padding: 10svh 10px;
+        font-size: 6svh;
+        font-weight: 600;
+        font-family: monospace;
+        border: none;
+        box-shadow: 0 0 10px #0000008d;
+        cursor: pointer;
+        scale: 0;
+        opacity: 0.2;
+        transition: .25s;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    & .changePage#prev { left: 4px}
+    & .changePage#next { right: 14px}
+    & .btns {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        align-items: center;
+        height: 5svh;
+        padding: 0 10px;
+        & .chapNo {
+            font-weight: 600;
+            text-align: center;
+            font-size: 2svh;
+        }
+        & button {
+            background: #555;
+            border: none;
+            color: #eee;
+            font-weight: 600;
+            font-size: 2.5svh;
+            font-family: monospace;
+            height: 100%;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: .25s;
+            &:hover {
+                background: #444;
+            }
+        }
+    }
+    & footer {
+        font-size: 2svh;
+        text-align: center;
+        padding-bottom: 4svh;
+        margin-top: 20px;
+        border: 4px solid #222;
+        padding-top: 20px;
+    }
+}
+
+.side-pannel {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 40svh;
+    transform: translateX(40svh);
+    background: #22222293;
+    backdrop-filter: blur(10px);
+    padding: 3svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    border-left: 2px solid #666;
+    filter: blur(5px);
+    z-index: 100;
+    transition: .25s;
+    & .close {
+        position: absolute;
+        background-color: #444;
+        border-radius: 100svh;
+        height: 6svh;
+        width: 6svh;
+        color: #eee;
+        font-weight: 600;
+        font-family: monospace;
+        font-size: 3svh;
+        left: calc(-6svh - 5px);
+        top: 3px;
+        border: 2px solid #666;
+        box-shadow: 6px 6px 10px -1px #eeeeee44,
+                    -6px -6px 10px -1px #00000041;
+        cursor: pointer;
+        scale: 0;
+        transition: .25s;
+        &:hover {
+            background: #22222293;
+        }
+    }
+    & h1 {
+        font-size: 6svh;
+    }
+    & #chapters, #View, .font-size, a {
+        background: #444;
+        height: 7svh;
+        width: 95%;
+        padding: 0 20px;
+        color: #eee;
+        font-weight: 600;
+        border: 2px solid #666;
+        border-radius: 4px;
+        outline: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 2.5svh;
+        opacity: 0;
+        filter: blur(5px);
+        transition: .5s;
+        transition-delay: calc(var(--i)*0.1s);
+    }
+    & #font {
+        margin-left: 10px;
+        height: 90%;
+        width: 40%;
+        background-color: #333;
+        border: none;
+        box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.423);
+        color: #eee;
+        font-size: 2.5svh;
+        padding-left: 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+}
+
+.side-pannel.active {
+    transform: translateX(0);
+    filter: blur(0);
+    & .close {
+        scale: 1;
+    }
+    & #chapters, #View, .font-size, a {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+main.view1 {
+    & .content-section {
+        width: 100%;
+        max-width: 55svh;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        & .list {
+            display: flex;
+            transform: translateX(calc(-100% * var(--s)));
+            justify-content: start;
+            align-items: center;
+            font-size: calc(var(--f) * 1svh);
+            transition: .25s;
+            & .content {
+                background-color: #aaa;
+                min-height: 90svh;
+                width: 100%;
+                margin: auto;
+                flex-shrink: 0;
+                max-width: 55svh;
+                border-radius: 5px;
+                padding: 2svh;
+            }
+        }
+    }
+    & .changePage {
+        scale: 1;
+    }
+}
+
+main.view2 {
+    & .content-section {
+        & .list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 30px;
+            font-size: calc(var(--f) * 1svh);
+            & .content {
+                background-color: #aaa;
+                min-height: 90svh;
+                width: 100%;
+                margin: auto;
+                flex-shrink: 0;
+                margin-top: 10px;
+                border-radius: 5px;
+                max-width: 55svh;
+                padding: 2svh;
+            }
+        }
+    }
+}
+
+main.view3 {
+    & .content-section {
+        & .list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            font-size: calc(var(--f) * 1svh);
+            & .content {
+                background-color: #aaa;
+                min-height: 90svh;
+                width: 100%;
+                margin: auto;
+                flex-shrink: 0;
+                margin-top: 10px;
+                border-radius: 5px;
+                max-width: 55svh;
+                padding: 2svh;
+            }
+        }
+    }
+}
+
+.select-screen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #33333362;
+    backdrop-filter: blur(5px);
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 98;
+    scale: 0;
+    & .close {
+        position: absolute;
+        background-color: #4444444c;
+        border-radius: 3px;
+        padding: 3px 10px;
+        display: flex;
+        color: #eee;
+        font-weight: 600;
+        font-size: 2.5svh;
+        left: 10px;
+        bottom: 10px;
+        border: 2px solid #666;
+        cursor: pointer;
+        transition: .25s;
+        z-index: 98;
+        opacity: 0.5;
+        &:hover {
+            opacity: 1;
+            background: #22222293;
+        }
+    }
+    & .content-section {
+        width: 100%;
+        max-width: 55svh;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: auto;
+        margin-bottom: 30px;
+        & .list {
+            display: flex;
+            transform: translateX(calc(-100% * var(--s)));
+            justify-content: start;
+            align-items: center;
+            font-size: calc(var(--f) * 1svh);
+            transition: .25s;
+            margin-top: 6svh;
+            & .content {
+                background-color: #aaa;
+                min-height: 90svh;
+                width: 100%;
+                margin: auto;
+                flex-shrink: 0;
+                max-width: 55svh;
+                border-radius: 5px;
+                padding: 2svh;
+            }
+        }
+    }
+    & .changePage {
+        position: absolute;
+        background: #2222223f;
+        color: #eee;
+        padding: 10svh 10px;
+        font-size: 6svh;
+        font-weight: 600;
+        font-family: monospace;
+        border: none;
+        box-shadow: 0 0 10px #0000008d;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: .25s;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    & .changePage#prev { left: 4px}
+    & .changePage#next { right: 4px}
+}
+
+.select-screen.active {
+    scale: 1;
+}
+
+@media screen and (max-width: 667px) {
+    .side-pannel {
+        left: 0;
+        width: 100%;
+        border: none;
+        box-shadow: inset 0 0 10px black;
+        transform: translateX(calc(100% + 10px));
+        & .close {
+            left: 0;
+            border-radius: 0;
+            top: 0;
+            border: 2px solid black;
+            box-shadow: 0 0 10px black;
+        }
+    }
+    .select-screen .changePage {
+        opacity: 0.2;
+    }
+}
+
+.linker {
+    scale: 0;
+}
+
+main .content-section .content,
+.select-screen .content-section .content {
+    position: relative;
+    & h1, h3, i, b, p, .page {
+        font-family: 'Times New Roman', Times, serif;
+        margin: 0 10px;
+    }
+    & h1 {
+        text-align: center;
+        font-size: 7svh;
+        position: absolute;
+        top: 20svh;
+    }
+    & h3 {
+        position: absolute;
+        bottom: 10svh;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+    & .page {
+        text-align: center;
+        font-weight: 600;
+        position: absolute;
+        bottom: 5px;
+        left: 2px;
+        font-size: 2.5svh;
+        color: #666;
+    }
+}
