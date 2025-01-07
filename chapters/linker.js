@@ -1,7 +1,7 @@
 const linker = document.querySelector('.linker')
 
 document.querySelector('header h3').addEventListener('click', () => {
-    linker.innerHTML = `<a href="../Home.html" id="clicker"></a>`
+    linker.innerHTML = `<a href="../index.html" id="clicker"></a>`
     document.getElementById('clicker').click()
 })
 
